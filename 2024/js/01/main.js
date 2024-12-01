@@ -24,6 +24,7 @@ function createArrayFromTxtAndSort() {
 
 const [list1, list2] = createArrayFromTxtAndSort()
 
+
 function calculateTotalDistance(list1, list2) {
   let result = 0
   for (let [i, num1] of list1.entries()) {
@@ -33,4 +34,14 @@ function calculateTotalDistance(list1, list2) {
   return result
 }
 
-console.log(calculateTotalDistance(list1, list2))
+function calculateSimilarityScore(list1, list2) {
+  console.log(list1, list2)
+  let result = 0
+  for (let num1 of list1) {
+    let k = Math.abs(list2.filter(num2 => num2 === num1).length)
+    result += num1 * k
+  }
+  return result
+}
+
+console.log(calculateSimilarityScore(list1, list2))
