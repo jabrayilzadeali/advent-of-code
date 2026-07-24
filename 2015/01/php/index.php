@@ -1,6 +1,6 @@
 <?php
 
-$data = file_get_contents("data/data.txt");
+$data = file_get_contents("../data/data.txt");
 
 // function firstStar($data) {
 //     $floor = 0;

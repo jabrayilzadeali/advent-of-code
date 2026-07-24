@@ -1,6 +1,6 @@
 <?php
 
-$data = file("data/data.txt");
+$data = file("../data/data.txt");
 
 
 function main($data, $secondStar = false) {
