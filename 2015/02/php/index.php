@@ -8,7 +8,7 @@ function main($data, $secondStar = false) {
     $total = 0;
     if(!empty($data)){
         // If having data
-        foreach($data as $line){
+        foreach($data as $line) {
             // Skipping the empty line and Comment line
             if((empty(trim($line))) || (preg_match('/^#/', $line) > 0))
                 continue;
