@@ -22,18 +22,40 @@ function checkDoubleChar(string $line) {
 
 function stringDontHaveCertainElements(string $line) {
     $shouldNotHave = ['ab', 'cd', 'pq', 'xy'];
-    // var_dump('str_contains: ', str_contains('xy', 'absdxy'));
     foreach($shouldNotHave as $el) {
         if (str_contains($line, $el)) return false;
     }
     return true;
 }
 
-// var_dump(check3vowels('aaba'));
-// var_dump(checkDoubleChar('ab'));
-// var_dump(stringDontHaveCertainElements('akcdefg'));
+function noOverlapTwoPair(string $str) {
+    $i = 0;
+    while($i < strlen($str) - 1) {
+        $portion = substr($str, $i, 2);
+        $leftSide = substr($str, 0, $i);
+        $rightSide = substr($str, $i + 2);
+        if (str_contains($leftSide, $portion) || str_contains($rightSide, $portion)) {
+            return true;
+        }
+        $i++;
+    }
+    return false;
+}
 
-function isNiceString(string $str) {
+function containsTwoLetterOneLetterInBetween(string $str) {
+    for ($i = 1; $i < strlen($str) - 1; $i++) {
+        if ($str[$i - 1] === $str[$i + 1]) return true;
+    }
+    return false;
+}
+
+function isNiceString(string $str, bool $part2 = false) {
+    if ($part2) {
+        return (
+            noOverlapTwoPair($str) &&
+            containsTwoLetterOneLetterInBetween($str)
+        );
+    }
     return (
         check3vowels($str) && 
         checkDoubleChar($str) && 
@@ -41,25 +63,15 @@ function isNiceString(string $str) {
     );
 }
 
-var_dump(isNiceString('haegwjzuvuyypxyu'));
 
 function main(array $data) {
     $niceCount = 0;
     foreach($data as $line) {
-        echo $line;
-        var_dump('check3vowels', check3vowels($line));
-        var_dump('checkDoubleChar', checkDoubleChar($line));
-        var_dump('stringDontHaveCertainElements', stringDontHaveCertainElements($line));
-        echo '----------------';
-        if (
-            isNiceString($line)
-        ) {
+        if (isNiceString($line, true)) {
             $niceCount++;
         }
     }
     return $niceCount;
 }
-
-$strTest = '';
 
 echo main($data);
